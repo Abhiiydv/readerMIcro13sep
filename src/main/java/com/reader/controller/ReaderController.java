@@ -1,6 +1,6 @@
 package com.reader.controller;
 
-import java.util.List;
+
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
-
-import com.reader.model.Book;
-//import com.reader.model.Order;
 import com.reader.model.PurchaseBook;
-//import com.reader.service.OrderServiceImpl;
 import com.reader.service.PurchaseServiceImpl;
 
 
@@ -27,30 +23,26 @@ public class ReaderController {
 
 	@Autowired
 	private RestTemplate restTemplate;
-	
-	//@Autowired
-	//private OrderServiceImpl orderserv;
-	
-	
+
 	@Autowired
 	private PurchaseServiceImpl perchaseserv;
-	
-	@GetMapping("/hello")
+
+	@GetMapping("/test")
 	public String greet() {
 		return "Hello, I am working fine@!";
 	}
-	
+
 	@GetMapping("/books/{id}")
 	public Object getBook(@PathVariable("id") Integer id) {
 		Object r = restTemplate.getForObject("http://book-microservice/books/"+id,Object.class);
-	  return r;	
- 
+		return r;	
+
 	}
 	@GetMapping("/books")
 	public Object getAllBooks() {
 		Object r = restTemplate.getForObject("http://book-microservice/books/",Object.class);
-	  return r;	
- 
+		return r;	
+
 	}
 	/*
 	 * @GetMapping("/search/{email}") public List<Integer>
@@ -59,14 +51,14 @@ public class ReaderController {
 	 * 
 	 * }
 	 */
-	
+
 	@PostMapping("/purhase")
 	public Integer purchase(@RequestBody PurchaseBook p) {
 		Integer id = this.perchaseserv.orderBook(p);
 		return id;
 	}
-	
-	
+
+
 	@GetMapping("/books/category/{category}")
 	public Object searchBooks(@PathVariable("category") String category){
 		Object r = restTemplate.getForObject("http://book-microservice/books/category/search?"+category,Object.class);
@@ -77,7 +69,7 @@ public class ReaderController {
 		Object res = restTemplate.getForObject("http://book-microservice/searchbooks/search?"+query,Object.class);
 		return res;
 	}
-	
+
 	/*
 	 * @GetMapping("/getPurchasedbooks/{email}") public List<Book>
 	 * getData(@PathVariable String email){ return
@@ -86,8 +78,6 @@ public class ReaderController {
 	 * }
 	 */
 
-
-	
 	/*
 	 * @PostMapping("/placeorder") public Order placeOrder(@RequestBody Order o) {
 	 * 
@@ -105,5 +95,5 @@ public class ReaderController {
 	 * 
 	 * }
 	 */
-	
+
 }
