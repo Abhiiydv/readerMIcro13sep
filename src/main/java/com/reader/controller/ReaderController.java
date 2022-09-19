@@ -3,6 +3,9 @@ package com.reader.controller;
 
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
+
+import com.reader.model.Book;
 import com.reader.model.PurchaseBook;
 import com.reader.service.PurchaseServiceImpl;
 
@@ -71,12 +76,26 @@ public class ReaderController {
 	}
 
 	/*
-	 * @GetMapping("/getPurchasedbooks/{email}") public List<Book>
-	 * getData(@PathVariable String email){ return
-	 * perchaseserv.getAllpurchasedBooks(email);
+	 * @GetMapping("/getPurchasedbooks/{email}") public List<Integer>
+	 * getBookIds(@PathVariable String email){ return
+	 * perchaseserv.findBookIdsbyEmail(email);
 	 * 
 	 * }
 	 */
+	 @GetMapping("/getPurchasedbooks/{email}") 
+	  public List<Integer> getBookIds(@PathVariable String email){ 
+		 List<Integer> bids =   perchaseserv.findBookIdsbyEmail(email);
+			/*
+			 * List<Book> bl = new ArrayList<Book>(); for(int i=0 ; i<=bids.size(); i++) {
+			 * Book r = (Book)
+			 * restTemplate.getForObject("http://book-microservice/books/"+bids.get(i),
+			 * Object.class); bl.add(r); }
+			 */
+		return bids;
+	  
+	  }
+	 
+	 
 
 	/*
 	 * @PostMapping("/placeorder") public Order placeOrder(@RequestBody Order o) {

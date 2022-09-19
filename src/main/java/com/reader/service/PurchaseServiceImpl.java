@@ -1,5 +1,7 @@
 package com.reader.service;
 
+import java.util.List;
+
 /*import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -28,14 +30,16 @@ public class PurchaseServiceImpl implements IPurchaseService{
 	}
 
 
-	/*
-	 * @Override public List<Book> getAllpurchasedBooks(String email) {
-	 * List<Integer>bookid=purchrepo.findByEmail(email); List<Book> books =new
-	 * ArrayList<Book>() ; for(int i=0;i<bookid.size();i++) {
-	 * 
-	 * Optional<Book>book=bookrepo.findById(bookid.get(i)); if(book.isPresent()) {
-	 * books.add(book.get()); } } return books; }
-	 */
+	 @Override 
+	 public List<Integer> findBookIdsbyEmail(String email) 
+	 {
+	 List<Integer>bookid=purchrepo.findByEmail(email); 
+	 return bookid;
+	 }
+	
+	 
+	
+	
 
 	/*@Override
 	public List<Integer> findBookIdsbyEmail(String buyerEmail) {
