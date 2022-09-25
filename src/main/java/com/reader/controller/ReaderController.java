@@ -23,7 +23,7 @@ import com.reader.service.PurchaseServiceImpl;
 
 
 @RestController
-@CrossOrigin(origins="http://localhost:4200")
+@CrossOrigin(origins="*")
 public class ReaderController {
 
 	@Autowired
